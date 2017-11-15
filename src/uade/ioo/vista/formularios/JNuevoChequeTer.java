@@ -1,72 +1,81 @@
 package uade.ioo.vista.formularios;
 
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
-import uade.ioo.modelo.AdministradorPagos;
-import uade.ioo.modelo.observer.IChequesTercero;
-/*import comportamientoConversor.IConversor;
-import controladorConversor.ControladorKM;
-import controladorConversor.ControladorMK;*/
-import uade.ioo.vista.controlador.ControladorNuevoChequeTer;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
-public class JNuevoChequeTer extends JPrincipal implements IChequesTercero{ //registrar cheques de terceros recibidos (creo ChequeTercero).
-	//private ChequeTercero ct;
+import uade.ioo.modelo.ChequeTerceros;
+import uade.ioo.vista.controlador.AdministradorPagos;
+
+public class JNuevoChequeTer extends JPrincipal {
+	
 	private static final long serialVersionUID = 1L;
-	private JTextField txt;
-	private JButton btnMK;
-	private JTextField txtc;
 	
-	public JNuevoChequeTer(AdministradorPagos ap) {		// consultar en donde agrego actionlistener !!!!!!!!!!!!!!!!!!!!!!!!
+	private JTextField txtNumero;
+	private JTextField txtFecha;
+	private JTextField txtMonto;
+	
+	private JButton btnRegistrar;
+	
+	public JNuevoChequeTer(AdministradorPagos ap) {
 		super(ap);
-		this.txt = new JTextField(); // q se ingrese fechaEmision 
-		this.txtc = new JTextField(); // q se ingrese monto de nuevo cheque tercero
-
-		this.getContentPane().setLayout(new FlowLayout()); //X q hay 1 solo control
-
-		this.txt.setColumns(12);
-		this.txtc.setColumns(20);
-
-		this.setSize(320, 200);
-		this.setLocationRelativeTo(null);
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		this.getContentPane().add(txt);
-		this.getContentPane().add(txtc); 
+		this.setTitle("Registrar cheque tercero");
+		getContentPane().setLayout(null);
 		
-		this.txtc.addActionListener(new ControladorNuevoChequeTer(this, this.getModelo()));
-		//this.txtc.actionPerformed();
-
-		/*this.btnMK = new JButton();
-		this.btnMK.setText("Convertir Millas a Kilometros");
-		this.btnMK.addActionListener(new ControladorMK (this));
+		JLabel lblNumero = new JLabel("Número");
+		lblNumero.setBounds(25, 40, 37, 14);
+		this.txtNumero = new JTextField();
+		this.txtNumero.setBounds(170, 37, 124, 20);
 		
-		this.getContentPane().add(btnMK);
-		this.getContentPane().add(txtc);*/
+		JLabel lblFecha = new JLabel("Fecha emisión");
+		lblFecha.setBounds(25, 71, 77, 14);
+		this.txtFecha = new JTextField(); 
+		this.txtFecha.setBounds(170, 68, 124, 20);
+		this.txtFecha.setColumns(20);
+		this.txtFecha.setColumns(8);
+		
+		JLabel lblMonto = new JLabel("Monto");
+		lblMonto.setBounds(25, 100, 77, 14);
+		this.txtMonto = new JTextField();
+		this.txtMonto.setToolTipText("dd/MM/yyyy");
+		this.txtMonto.setBounds(170, 97, 124, 20);
+		this.txtMonto.setColumns(20);
+		
+		this.btnRegistrar= new JButton();
+		this.btnRegistrar.setBounds(247, 143, 77, 23);
+		this.btnRegistrar.setText("Registrar");
+		this.btnRegistrar.addActionListener(
+			new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					getControlador().registrarCheque(
+						new ChequeTerceros(
+							Integer.valueOf(txtNumero.getText()), 
+							DateTime.parse(txtFecha.getText(), DateTimeFormat.forPattern("dd/MM/yyyy")), 
+							Double.valueOf(txtMonto.getText())
+						)
+					);
+					txtNumero.setText("");
+					txtFecha.setText("");
+					txtMonto.setText("");
+				}
+			}
+		);
+		
+		this.getContentPane().add(lblNumero);
+		this.getContentPane().add(txtNumero);
+		this.getContentPane().add(lblMonto);
+		this.getContentPane().add(txtMonto); 
+		this.getContentPane().add(lblFecha);
+		this.getContentPane().add(txtFecha);
+		this.getContentPane().add(btnRegistrar);
 	}
-
-	@Override
-	public String getFecha() {
-		return this.txt.getText ();
-	}
-
-	@Override
-	public String getMonto() {
-		return this.txtc.getText ();
-	}
-	
-	/*private void registrarNuevoChequeTer (){
-	}
-	
-	public (){ // actualizo modelo
-
-	}*/	
 
 }

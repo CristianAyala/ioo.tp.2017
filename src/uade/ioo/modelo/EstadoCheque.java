@@ -1,11 +1,5 @@
 package uade.ioo.modelo;
 
-public class EstadoCheque {
-	
-
-	public EstadoCheque () {
-		
-	}
-
+public abstract class EstadoCheque {
 	
 }

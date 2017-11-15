@@ -1,34 +1,20 @@
 package uade.ioo.modelo;
 
-public class ChequeTerceros extends Cheque{
-	private EstadoCheque ech;
-	//private String nombre= ;
+import org.joda.time.DateTime;
 
-	public ChequeTerceros (int fechaEmision, int monto) {
-		super (fechaEmision, monto);
+public class ChequeTerceros extends Cheque {
+	
+	public ChequeTerceros (Integer numero, DateTime fechaEmision, Double monto) {
+		super (numero, monto, fechaEmision, new Recibido());
 	}
 
-	public void sePuedePagarCon () {
-		
+	@Override
+	public String getNombre() {
+		return "Cheque tercero";
 	}
 
-	public int getMontoDisponiblePago () {
-		return this.monto;
+	public DateTime getFechaVencimiento() {
+		return super.fechaEmision.plusDays(Cheque.VIGENCIA);
 	}
-
-	public String getNombre (){
-		return "tercero";
-	}
-
-	public EstadoCheque getEstado () {
-		return this.ech;
-	}
-
-	/*public void cambiarEstado () {
-		this.ech; // cambio recibido a ado
-	}*/
-
-	public int getFechaVencimiento (){
-		return this.fechaEmision + 30;
-	}
+	
 }

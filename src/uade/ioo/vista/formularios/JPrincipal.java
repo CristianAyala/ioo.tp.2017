@@ -1,100 +1,57 @@
 package uade.ioo.vista.formularios;
 
-import java.awt.FlowLayout;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
-import uade.ioo.modelo.AdministradorPagos;
-/*import comportamientoConversor.IConversor;
-import controladorConversor.ControladorKM;
-import controladorConversor.ControladorMK;*/
+import uade.ioo.vista.controlador.AdministradorPagos;
 
 public class JPrincipal extends JFrame{
-	private AdministradorPagos admp;
+
 	private static final long serialVersionUID = 1L;
-	private JTextField txt;
-	private JButton btnMK;
-	private JButton btnKM;
-	private JTextField txtc;
+	
+	private AdministradorPagos admp;
 	
 	public JPrincipal(AdministradorPagos ap) {
 		this.admp= ap;		
 
-		this.setSize(320, 200);
+		this.setTitle("Menú principal");
+		this.setSize(350, 250);
 		this.setLocationRelativeTo(null);
-		//this.getContentPane().setLayout(new FlowLayout());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JMenuBar barra= new JMenuBar ();
-		JMenu formularios= new JMenu ("Formularios");
-		barra.add (formularios);
-		JMenuItem formTextbox= new JMenuItem ("Crear Cheque Tercero");
-		
-		formTextbox.addActionListener(new ActionListener() {
-			
+		JMenuItem itemRegistrarChequeTercero= new JMenuItem ("Registrar Cheque Tercero");
+		itemRegistrarChequeTercero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AdministradorPagos ap= new AdministradorPagos ();
-				JFrame vNCT= new  JNuevoChequeTer(ap); // this.admp.registrar (ct);  !!!!!!!
-				vNCT.setVisible(true);				
+				JNuevoChequeTer registrarChequeTercero= new JNuevoChequeTer(admp);
+				registrarChequeTercero.setVisible(true);				
+			}
+		});
+		JMenuItem itemTercerosAVencer= new JMenuItem ("Cheques Terceros a Vencer");
+		itemTercerosAVencer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JTercerosAVencer tercerosAVencer = new JTercerosAVencer(admp);
+				admp.registrarObservador(tercerosAVencer);
+				tercerosAVencer.setVisible(true);				
 			}
 		});
 
-		/*JMenuItem formPagarSer= new JMenuItem ("Formulario para pagar Servicio");
-		
-		formPagarSer.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				JFrame f2= new PagarServicio();
-				f2.setVisible(true);				
-			}
-		});*/
+		JMenu opciones= new JMenu("Opciones");
+		opciones.add(itemRegistrarChequeTercero);
+		opciones.add(itemTercerosAVencer);
 
-
-		formularios.add (formTextbox);
-		//formularios.add (formPagarSer);
-
+		JMenuBar barra = new JMenuBar();
+		barra.add(opciones);
 		this.setJMenuBar(barra);
-
-		this.setSize(320, 200);
-		this.setLocationRelativeTo(null);
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		/*this.txt = new JTextField();
-		this.btnMK = new JButton();
-		this.btnMK.setText("Convertir Millas a Kilometros");
-		this.btnMK.addActionListener(new ControladorMK (this));
-		this.txtc = new JTextField();
-		
-		this.txt.setColumns(12);
-		this.txtc.setColumns(20);
-	
-
-		
-		this.getContentPane().add(txt);
-		this.getContentPane().add(btnMK);
-		this.getContentPane().add(txtc);*/
 	}
 	
-	protected AdministradorPagos getModelo(){
+	protected AdministradorPagos getControlador(){
 		return this.admp;
 	}
 
-	/*public String getValor() {
-		return this.txt.getText();
-	}
-
-	@Override
-	public void setMensajeConversion(String valor) {
-		this.txtc.setText(valor);
-	}*/
-
-	
 }
