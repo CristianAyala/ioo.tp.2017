@@ -1,5 +1,7 @@
 package uade.ioo.modelo;
 
-public abstract class EstadoCheque {
+public enum EstadoCheque {
+
+	Recibido, Depositado, Entregado, Vencido, Emitido; 
 	
 }

@@ -2,15 +2,15 @@ package uade.ioo.modelo;
 
 import org.joda.time.DateTime;
 
-public class ChequeTerceros extends Cheque {
+public class ChequeDeTerceros extends Cheque {
 	
-	public ChequeTerceros (Integer numero, DateTime fechaEmision, Double monto) {
-		super (numero, monto, fechaEmision, new Recibido());
+	public ChequeDeTerceros (Integer numero, Double monto, DateTime fechaEmision) {
+		super(numero, fechaEmision, monto, EstadoCheque.Recibido);
 	}
 
 	@Override
 	public String getNombre() {
-		return "Cheque tercero";
+		return "Cheque Tercero";
 	}
 
 	public DateTime getFechaVencimiento() {
