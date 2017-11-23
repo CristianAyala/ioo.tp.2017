@@ -4,8 +4,8 @@ import org.joda.time.DateTime;
 
 public abstract class Cheque {
 	
-	public static Integer VIGENCIA = 30;
-	public static Integer DIAS_PREVIOS_AVISO_VENCIMIENTO = 7;
+	public final static Integer VIGENCIA = 30;
+	public final static Integer DIAS_PREVIOS_AVISO_VENCIMIENTO = 7;
 	
 	protected Integer numero;
 	protected Double monto; 

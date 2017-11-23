@@ -1,6 +1,7 @@
 package uade.ioo.vista.formulario;
 
-import javax.swing.BoxLayout;
+import java.awt.Font;
+
 import javax.swing.JLabel;
 
 import uade.ioo.modelo.AdministradorPagos;
@@ -17,18 +18,54 @@ public class JFormularioReporte extends JFormularioBaseObservador {
 
 	public JFormularioReporte(AdministradorPagos modelo) {
 		super(modelo);
+		getContentPane().setLayout(null);
 		this.setTitle("Reporte de Cheques");
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
-		this.getContentPane().add(new JLabel("Monto Disponible: "));
+
+		JLabel label = new JLabel("Monto Disponible: ");
+		label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label.setBounds(152, 66, 188, 14);
+		this.getContentPane().add(label);
+		
+		lblMontoDisponible.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMontoDisponible.setBounds(350, 66, 62, 14);
 		this.getContentPane().add(lblMontoDisponible);
-		this.getContentPane().add(new JLabel("Monto Pagado: "));
+		
+		JLabel label_1 = new JLabel("Monto Pagado: ");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label_1.setBounds(152, 116, 188, 14);
+		this.getContentPane().add(label_1);
+		
+		lblMontoPagado.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMontoPagado.setBounds(350, 91, 62, 14);
 		this.getContentPane().add(lblMontoPagado);
-		this.getContentPane().add(new JLabel("Monto Depositado: "));
+		
+		JLabel label_2 = new JLabel("Monto Depositado: ");
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label_2.setBounds(152, 91, 188, 14);
+		this.getContentPane().add(label_2);
+		
+		lblMontoDepositado.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMontoDepositado.setBounds(350, 116, 62, 14);
 		this.getContentPane().add(lblMontoDepositado);
-		this.getContentPane().add(new JLabel("Monto Emitido: "));
+		
+		JLabel label_3 = new JLabel("Monto Emitido: ");
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label_3.setBounds(152, 141, 188, 14);
+		this.getContentPane().add(label_3);
+		
+		lblMontoEmitido.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMontoEmitido.setBounds(350, 141, 62, 14);
 		this.getContentPane().add(lblMontoEmitido);
-		this.getContentPane().add(new JLabel("Monto a Vencer: "));
+		
+		JLabel label_4 = new JLabel("Monto a Vencer: ");
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label_4.setBounds(152, 166, 188, 14);
+		this.getContentPane().add(label_4);
+		
+		lblMontoAVencer.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMontoAVencer.setBounds(350, 166, 62, 14);
 		this.getContentPane().add(lblMontoAVencer);
+		
 		this.actualizar();
 	}
 
